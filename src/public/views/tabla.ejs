@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1>Generos</h1>
+        </div>
+        <div class="30%">
+            <label>Cantidad de registros a mostrar</label>
+            <select class="form-select" aria-label="Cantidad de registros a mostrar" id="cant" onchange="setLocal(event)">
+                <option selected>Seleccione una opción</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Disambiguation</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% generos.forEach(function(genero){ %>
+                    <tr>
+                        <th scope="row">
+                            <%= genero.id %>
+                        </th>
+                        <th scope="row">
+                            <%= genero.disambiguation %>
+                        </th>
+                        <th scope="row">
+                            <%= genero.name %>
+                        </th>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item <%= prevtext %>">
+                    <a class="page-link" href="http://localhost:3000/tabla/<%= prev %>/<%= rows %>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item <%= prevtext %>"><a class="page-link"
+                        href="http://localhost:3000/tabla/<%= prev %>/<%= rows %>">
+                        <%= prev %>
+                    </a></li>
+                <li class="page-item active"><a class="page-link" href="#">
+                        <%= act %>
+                    </a></li>
+                <li class="page-item <%= sigtext %>"><a class="page-link" href="http://localhost:3000/tabla/<%= sig %>/<%= rows %>">
+                        <%= sig %>
+                    </a></li>
+                <li class="page-item <%= sigtext %>">
+                    <a class="page-link" href="http://localhost:3000/tabla/<%= sig %>/<%= rows %>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+
+<script>
+    function setLocal(value){
+        location.href="http://localhost:3000/tabla/<%= act %>/"+value.target.value;
+    }
+</script>
+
+</html>
